@@ -33,8 +33,8 @@ public class UnitController {
         return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<UnitDto>> getAllUnits() {
         List<UnitDto> unitDtoList = unitService.findAllUnits();
         return ResponseEntity.ok(unitDtoList);
