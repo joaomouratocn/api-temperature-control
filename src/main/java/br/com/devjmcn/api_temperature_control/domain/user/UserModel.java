@@ -27,10 +27,12 @@ public class UserModel {
     private Boolean emailRel;
     private Boolean enable;
 
-    public UserModel(@NotNull @NotBlank String name,
-                     @NotNull @NotBlank String email,
-                     @NotNull @NotBlank String password,
-                     @NotBlank @NotNull Integer unitId) {
+    public UserModel(
+            @NotNull @NotBlank String name,
+            @NotNull @NotBlank String email,
+            @NotNull @NotBlank String password,
+            @NotBlank @NotNull Integer unitId
+    ) {
         this.name = name;
         this.email = email;
         this.password = password;
