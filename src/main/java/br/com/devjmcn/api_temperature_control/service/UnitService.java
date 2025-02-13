@@ -22,11 +22,19 @@ public class UnitService {
     }
 
     public UnitDto updateUnit(UnitDto unitDto) {
-        UnitModel unitModel = unitRepository.findById(unitDto.id()).orElseThrow(() -> new NotDataFoundException("No unit found!"));
+        UnitModel unitModel = unitRepository.findById(unitDto.id())
+                .orElseThrow(() -> new NotDataFoundException("No unit found!"));
         unitModel.setId(unitDto.id());
         unitModel.setName(unitDto.name());
         unitRepository.save(unitModel);
         return unitDto;
+    }
+
+    public void deleteUnit(String id) {
+        UnitModel unitModel = unitRepository.findById(id)
+                .orElseThrow(() -> new NotDataFoundException("No unit Found!"));
+        unitModel.setEnable(false);
+        unitRepository.save(unitModel);
     }
 
     public List<UnitDto> findAllUnits() {
@@ -39,10 +47,5 @@ public class UnitService {
         return unitListModel.stream()
                 .map(unitModel -> new UnitDto(unitModel.getId(), unitModel.getName()))
                 .collect(Collectors.toList());
-    }
-
-    public void deleteUnit(String id) {
-        unitRepository.findById(id).orElseThrow(() -> new NotDataFoundException("No unit Found!"));
-        unitRepository.deleteById(id);
     }
 }

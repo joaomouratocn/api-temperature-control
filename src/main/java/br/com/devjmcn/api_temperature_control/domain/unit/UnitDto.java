@@ -5,9 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record UnitDto(
         String id,
-
         @NotNull
-        @NotBlank
         @NotBlank
         String name
 ) {}

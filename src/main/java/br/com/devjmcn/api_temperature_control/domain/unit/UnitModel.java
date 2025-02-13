@@ -19,6 +19,7 @@ public class UnitModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String name;
+    private Boolean enable;
 
     public UnitModel(@NotNull @NotBlank @NotBlank String name) {
         this.name = name;

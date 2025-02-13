@@ -2,7 +2,8 @@ CREATE TABLE users(
     id VARCHAR(50) PRIMARY KEY,
     email VARCHAR(50) UNIQUE NOT NULL,
     name VARCHAR(50) NOT NULL,
-    password VARCHAR(100) NOT NULL,
+    password VARCHAR(12) NOT NULL,
+    unit INTEGER NOT NULL,
     emit_rel BOOLEAN DEFAULT FALSE,
     enable BOOLEAN DEFAULT TRUE
 );
