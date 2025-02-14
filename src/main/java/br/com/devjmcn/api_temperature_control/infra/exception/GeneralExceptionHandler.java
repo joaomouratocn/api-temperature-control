@@ -2,6 +2,7 @@ package br.com.devjmcn.api_temperature_control.infra.exception;
 
 import br.com.devjmcn.api_temperature_control.infra.exception.custom.InvalidCredentialException;
 import br.com.devjmcn.api_temperature_control.infra.exception.custom.NotDataFoundException;
+import br.com.devjmcn.api_temperature_control.infra.exception.custom.UserExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,5 +38,11 @@ public class GeneralExceptionHandler {
     public ResponseEntity<ErrorResponse>handlerInvalidCredentialException(InvalidCredentialException e){
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Credenciais invalidas");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(UserExistException.class)
+    public ResponseEntity<ErrorResponse>handler(UserExistException e){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.CONFLICT.value(), "Usuário já Cadastrado!");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 }

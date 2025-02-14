@@ -33,7 +33,7 @@ public class UnitService {
     public void deleteUnit(String id) {
         UnitModel unitModel = unitRepository.findById(id)
                 .orElseThrow(() -> new NotDataFoundException("No unit Found!"));
-        unitModel.setEnable(false);
+        unitModel.setEnable(0);
         unitRepository.save(unitModel);
     }
 

@@ -22,16 +22,14 @@ public class UserModel {
     private String email;
     private String password;
     @Column(name = "unit")
-    private Integer unitId;
-    @Column(name = "emit_rel")
-    private Boolean emailRel;
-    private Boolean enable;
+    private String unitId;
+    private Boolean enable = true;
 
     public UserModel(
             @NotNull @NotBlank String name,
             @NotNull @NotBlank String email,
             @NotNull @NotBlank String password,
-            @NotBlank @NotNull Integer unitId
+            @NotBlank @NotNull String unitId
     ) {
         this.name = name;
         this.email = email;

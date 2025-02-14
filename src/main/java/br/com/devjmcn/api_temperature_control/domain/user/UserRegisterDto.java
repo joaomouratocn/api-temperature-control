@@ -16,5 +16,5 @@ public record UserRegisterDto(
         String password,
         @NotBlank
         @NotNull
-        Integer unitId
+        String unitId
 ) {}

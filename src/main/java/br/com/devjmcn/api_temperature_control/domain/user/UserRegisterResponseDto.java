@@ -15,5 +15,5 @@ public record UserRegisterResponseDto(
         String email,
         @NotNull
         @NotBlank
-        Integer unitId
+        String unitId
 ){}
