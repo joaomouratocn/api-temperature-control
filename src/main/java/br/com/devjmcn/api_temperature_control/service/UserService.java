@@ -1,10 +1,10 @@
 package br.com.devjmcn.api_temperature_control.service;
 
 import br.com.devjmcn.api_temperature_control.domain.user.*;
+import br.com.devjmcn.api_temperature_control.infra.exception.custom.InvalidCredentialException;
 import br.com.devjmcn.api_temperature_control.infra.exception.custom.NotDataFoundException;
 import br.com.devjmcn.api_temperature_control.infra.securety.TokenService;
 import br.com.devjmcn.api_temperature_control.repository.UserRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -70,12 +70,13 @@ public class UserService {
                 .build();
     }
 
-    public UserLoginResponseDto loginUser(@Valid UserLoginDto userLoginDto) {
+    public UserLoginResponseDto loginUser(UserLoginDto userLoginDto) {
         UserModel userModel = userRepository.findByEmail(userLoginDto.email())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
-        if (passwordEncoder.matches(userLoginDto.password(), userModel.getPassword())){
-            String token = tokenService.generateToken(userModel);
-            return new UserLoginResponseDto(token, )
+        if (!passwordEncoder.matches(userLoginDto.password(), userModel.getPassword())) {
+            throw new InvalidCredentialException("Invalid credentials!");
         }
+        String token = tokenService.generateToken(userModel);
+        return new UserLoginResponseDto(token, userModel.getName());
     }
 }
